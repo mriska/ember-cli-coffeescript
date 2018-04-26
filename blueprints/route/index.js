@@ -26,6 +26,11 @@ module.exports = {
     return blueprint.fileMapTokens.apply(blueprint, arguments);
   },
 
+  locals: function() {
+    var blueprint = ancestralBlueprint('route', this.project);
+    return blueprint.locals.apply(blueprint, arguments);
+  },
+
   shouldTouchRouter: function(name, options) {
     return ancestralBlueprint('route', this.project).shouldTouchRouter(name, options);
   },
