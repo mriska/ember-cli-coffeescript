@@ -13,15 +13,14 @@ var expectCoffee = require('../helpers/expect-coffee');
 describe('Acceptance: ember generate and destroy route', function() {
   setupTestHooks(this);
 
-  it.skip('route foo', function() {
-    var args = ['route', 'foo'];
+  it('route foo', function() {
+    var args = ['route', 'foo', '--skip-router'];
 
     return emberNew()
       .then(() => emberGenerateDestroy(args, (_file) => {
         expect(_file('app/routes/foo.coffee'))
           .to.contain("import Ember from 'ember'")
-          .to.contain('FooRoute = Ember.Route.extend()')
-          .to.contain("export default FooRoute");
+          .to.contain('export default Ember.Route.extend()');
 
         expect(_file('app/templates/foo.hbs'))
           .to.contain('{{outlet}}');
@@ -30,12 +29,12 @@ describe('Acceptance: ember generate and destroy route', function() {
           .to.contain("import { moduleFor, test } from 'ember-qunit'")
           .to.contain("moduleFor 'route:foo', 'Unit | Route | foo', {");
 
-        expect(file('app/router.coffee'))
-          .to.contain("@route 'foo'");
+        // expect(file('app/router.coffee'))
+        //   .to.contain("@route 'foo'");
       })
-      .then(() => expect(file('app/router.coffee'))
-        .to.not.contain("@route 'foo'")
-    ));
+      // .then(() => expect(file('app/router.coffee'))
+      //   .to.not.contain("@route 'foo'"))
+    );
   });
 
   it('route-test foo', function() {
